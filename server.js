@@ -47,7 +47,7 @@ function getHandler(req, res) {
 }
 
 
-function sendSensorData(req, res) {
+async function sendSensorData(req, res) {
 
     console.log('sending data')
 
@@ -55,15 +55,15 @@ function sendSensorData(req, res) {
 }
 
 
-function setSensorData(req, res) {
+async function setSensorData(req, res) {
 
     if(req.query.r && req.query.h && req.query.t) {
 
         offlineTimer = 5;
         sensorData.lastUpdated = getIST();
-        sensorData.humidity = parseInt(req.query.h);
-        sensorData.temp = parseInt(req.query.t);
-        sensorData.rain = parseInt(req.query.r);
+        sensorData.humidity = req.query.h.toString();
+        sensorData.temp = req.query.t.toString();
+        sensorData.rain = req.query.r.toString();
 
         console.log('sensor data updated');
 
