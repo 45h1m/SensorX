@@ -169,9 +169,10 @@
         <script>
             const $ = (name) => document.querySelector(name);
 
-            setInterval(fetchSensorData, 5000);
+            setInterval(fetchSensorData, 3000);
 
             async function fetchSensorData() {
+
                 const data = await fetch(`/getSensorData`, {
                     mode: "no-cors",
                 })
@@ -184,7 +185,10 @@
                 if (data.rain && data.temp && data.humidity) updateUI(data);
             }
 
+
+
             function updateUI(data) {
+
                 if (data.rain && data.temp && data.humidity) {
                     $("#rain-display").innerHTML = data.rain.toString();
                     $("#temp-display").innerHTML = data.temp.toString();
@@ -195,13 +199,17 @@
                     if (data.deviceStatus) $("#device-status-display").classList.add("online");
                     else $("#device-status-display").classList.remove("online");
 
-                    $('#fetch-status').classList.add('active');
-                    setTimeout(() => {
-                        $('#fetch-status').classList.remove('active');
-                    }, 100);
+                    updateFetchingIndicator();
                 }
             }
 
+
+            function updateFetchingIndicator() {
+                $('#fetch-status').classList.add('active');
+                    setTimeout(() => {
+                        $('#fetch-status').classList.remove('active');
+                    }, 100);
+            }
             
 
         </script>
