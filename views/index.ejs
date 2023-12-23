@@ -113,7 +113,7 @@
                 border-radius: 50px;
                 background: rgb(48, 246, 48);
                 opacity: 0;
-                transition: 500ms linear;
+                transition: 2000ms linear;
             }
             
             #fetch-status.active {
@@ -159,6 +159,10 @@
             <div class="h-bar" --data-value="89" style="--bg-color: rgb(11, 25, 41)">
                 <p><strong id="rain-display"><%= rain %></strong> <span>mm </span></p>
             </div>
+            <p style="color: aliceblue; width: 100%; max-width: 300px; opacity: 0.5;">Light</p>
+            <div class="h-bar" --data-value="89" style="--bg-color: rgb(0, 55, 51)">
+                <p><strong id="light-display"><%= light %></strong> <span>lm </span></p>
+            </div>
 
             <p id="last-updated">
                 Last updated: &nbsp;
@@ -189,10 +193,11 @@
 
             function updateUI(data) {
 
-                if (data.rain && data.temp && data.humidity) {
+                if (data.rain && data.temp && data.humidity && data.light) {
                     $("#rain-display").innerHTML = data.rain.toString();
                     $("#temp-display").innerHTML = data.temp.toString();
                     $("#humidity-display").innerHTML = data.humidity.toString();
+                    $("#light-display").innerHTML = data.light.toString();
 
                     $("#last-updated-display").innerHTML = data.lastUpdated;
 
