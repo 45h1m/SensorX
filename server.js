@@ -22,6 +22,7 @@ let sensorData = {
     temp: '--',
     humidity: '--',
     rain: '--',
+    light: '--',
     lastUpdated: 'Waiting for device'
 }
 
@@ -57,13 +58,14 @@ async function sendSensorData(req, res) {
 
 async function setSensorData(req, res) {
 
-    if(req.query.r && req.query.h && req.query.t) {
+    if(req.query.r && req.query.h && req.query.t && req.query.l) {
 
         offlineTimer = 5;
         sensorData.lastUpdated = getIST();
         sensorData.humidity = req.query.h.toString();
         sensorData.temp = req.query.t.toString();
         sensorData.rain = req.query.r.toString();
+        sensorData.light = req.query.l.toString();
 
         console.log('sensor data updated');
 
